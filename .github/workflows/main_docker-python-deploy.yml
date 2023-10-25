@@ -23,15 +23,15 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://dockerdanjgo.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_e29be719d77549f29c4b573cafedd37f }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_882df5d4dcbd42848ed5832f3df7ea1f }}
+        username: ${{ secrets.PYTHON_KEY_DOCKER_USERNAME }}
+        password: ${{ secrets.PYTHON_KEY_DOCKER_PASSWORD }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: dockerdanjgo.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e29be719d77549f29c4b573cafedd37f }}/DockerPython:${{ github.sha }}
-        file: ./Dockerfile
+        tags: dockerdanjgo.azurecr.io/DockerPython:${{ github.sha }}
+        file: ./docker
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'docker-python-deploy'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_8da90ad2728d4c8eb8044431b4112457 }}
-        images: 'dockerdanjgo.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e29be719d77549f29c4b573cafedd37f }}/DockerPython:${{ github.sha }}'
+        publish-profile: ${{ secrets.PUBLISH_KEY }}
+        images: 'dockerdanjgo.azurecr.io/DockerPython:${{ github.sha }}'
