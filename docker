@@ -1,4 +1,14 @@
-FROM python3.7 
-COPY home /app
-COPY requirements.txt .
-RUN pip --no-cache-dir install -r requirements.txt
+# FROM python3.7 
+# COPY home /app
+# COPY requirements.txt .
+# RUN pip --no-cache-dir install -r requirements.txt
+
+FROM python:3.10
+
+RUN mkdir /code
+WORKDIR /code
+ADD . /code/
+RUN pip install -r requirements.txt
+
+EXPOSE 8000
+CMD ["python", "/code/manage.py", "runserver", "0.0.0.0:8000"]
