@@ -5,7 +5,5 @@ WORKDIR /code
 ADD . /code/
 RUN pip install -r requirements.txt
 
-RUN go build -o home
-
 EXPOSE 8080
-CMD ["./home"]
+CMD [".code/home"]
