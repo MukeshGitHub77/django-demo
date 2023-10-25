@@ -1,4 +1,4 @@
-FROM python3.7 
+FROM python3.10
 COPY home /app
 COPY requirements.txt .
 RUN pip --no-cache-dir install -r requirements.txt
