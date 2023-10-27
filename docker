@@ -6,4 +6,4 @@ ADD . /code/
 RUN pip install -r requirements.txt
 
 EXPOSE 8080
-CMD [".code/home"]
+CMD [".code/home/views.py"]
