@@ -1,8 +1,9 @@
 FROM python:3.10
 
-WORKDIR /home
-COPY /home .
+RUN mkdir /code
+WORKDIR /code
+ADD . /code/
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python"]
-CMD ["views.py"]
+EXPOSE 8080
+CMD [".code/home"]
