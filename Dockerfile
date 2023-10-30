@@ -1,10 +1,9 @@
-#Tells Docker to use the official python 3 image from dockerhub as a base image
 FROM python:3.10
-# Sets an environmental variable that ensures output from python is sent straight to the terminal without buffering it first
-ENV PYTHONUNBUFFERED 1
-# Sets the container's working directory to /app
-WORKDIR /home
-# Copies all files from our local project into the container
-ADD . /home/
-# runs the pip install command for all packages listed in the requirements.txt file
+
+RUN mkdir /code
+WORKDIR /code
+ADD . /code/
 RUN pip install -r requirements.txt
+
+EXPOSE 8080
+CMD [".code/home"]
